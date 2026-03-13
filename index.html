@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚔️ Johnson Daril · Dark Gold ⚔️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', system-ui, sans-serif;
+            background: #121212;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            background-image: radial-gradient(circle at 20% 30%, rgba(184, 134, 11, 0.08) 0%, transparent 30%),
+                              radial-gradient(circle at 90% 70%, rgba(218, 165, 32, 0.05) 0%, transparent 40%);
+            animation: breathe 10s infinite alternate ease-in-out;
+        }
+
+        @keyframes breathe {
+            0% { background-size: 100% 100%; }
+            100% { background-size: 120% 120%; }
+        }
+
+        /* animation des poussières dorées */
+        .static-motes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.25;
+            animation: floatMotes 20s infinite linear;
+        }
+        .static-motes span {
+            position: absolute;
+            font-size: 2.2rem;
+            color: #d4af37;
+            filter: drop-shadow(0 0 3px #b8860b);
+            animation: twinkle 4s infinite alternate;
+        }
+        @keyframes floatMotes {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-20px) rotate(2deg); }
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(1); }
+            100% { opacity: 0.5; transform: scale(1.1); }
+        }
+
+        .card-container {
+            max-width: 1350px;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 50px 50px 40px 40px;
+            box-shadow: 0 30px 40px -10px rgba(0,0,0,0.8),
+                        0 0 0 3px #b8860b inset,
+                        0 0 0 1px #f0e68c inset;
+            padding: 30px 25px;
+            position: relative;
+            z-index: 20;
+            border: 1px solid rgba(218, 165, 32, 0.3);
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== HEADER ===== */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            animation: fadeIn 1.2s ease;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50% 50% 30% 30%;
+            background: linear-gradient(145deg, #2c2518, #1f1a10);
+            border: 5px solid #b8860b;
+            box-shadow: 0 12px 0 #5e4a1a, 0 0 15px #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: avatarGlow 3s infinite alternate;
+        }
+
+        @keyframes avatarGlow {
+            0% { box-shadow: 0 12px 0 #5e4a1a, 0 0 15px #d4af37; }
+            100% { box-shadow: 0 12px 0 #7f621b, 0 0 30px #f5c542; }
+        }
+
+        .avatar:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 15px 0 #7f621b, 0 0 35px #f5c542;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .avatar:hover img {
+            transform: scale(1.1);
+        }
+
+        h1 {
+            font-size: clamp(2.4rem, 8vw, 4rem);
+            font-weight: 800;
+            color: #f5c542;
+            text-shadow: 3px 3px 0 #7f5d1a, 5px 5px 0 #3a2e0f;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            text-align: center;
+            animation: titlePulse 2s infinite alternate;
+        }
+
+        @keyframes titlePulse {
+            0% { text-shadow: 3px 3px 0 #7f5d1a, 5px 5px 0 #3a2e0f; }
+            100% { text-shadow: 5px 5px 0 #7f5d1a, 8px 8px 0 #3a2e0f; }
+        }
+
+        .age-tag {
+            background: #1e1a12;
+            padding: 8px 25px;
+            border-radius: 40px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #e4b130;
+            border: 2px solid #b8860b;
+            box-shadow: 0 5px 0 #5e4a1a;
+            display: inline-flex;
+            gap: 10px;
+            align-items: center;
+            transition: all 0.3s ease;
+            animation: tagWobble 4s infinite;
+        }
+
+        @keyframes tagWobble {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        .age-tag:hover {
+            background: #2a241b;
+            box-shadow: 0 8px 0 #7f621b;
+            transform: translateY(-3px);
+        }
+
+        /* ===== CARTE INFOS ===== */
+        .info-panel {
+            background: rgba(25, 20, 12, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 45px;
+            padding: 30px 25px;
+            margin: 30px 0;
+            border: 3px solid #b8860b;
+            box-shadow: 0 12px 0 #4a3a16;
+            animation: panelGlow 4s infinite alternate;
+        }
+
+        @keyframes panelGlow {
+            0% { box-shadow: 0 12px 0 #4a3a16, 0 0 10px rgba(184,134,11,0.3); }
+            100% { box-shadow: 0 12px 0 #7f621b, 0 0 20px rgba(218,165,32,0.6); }
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .info-tile {
+            background: #1e1a13;
+            border-radius: 40px;
+            padding: 18px 18px 18px 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 2px solid #b8860b;
+            box-shadow: 0 5px 0 #5e4a1a;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: tileFadeIn 0.5s ease backwards;
+        }
+
+        .info-tile:nth-child(1) { animation-delay: 0.1s; }
+        .info-tile:nth-child(2) { animation-delay: 0.2s; }
+        .info-tile:nth-child(3) { animation-delay: 0.3s; }
+        .info-tile:nth-child(4) { animation-delay: 0.4s; }
+        .info-tile:nth-child(5) { animation-delay: 0.5s; }
+        .info-tile:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes tileFadeIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .info-tile:hover {
+            background: #2b241b;
+            box-shadow: 0 8px 0 #8b691f;
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .tile-icon {
+            font-size: 2.3rem;
+            min-width: 50px;
+            text-align: center;
+            color: #f5c542;
+            filter: drop-shadow(0 2px 2px #000);
+            animation: iconSpin 10s infinite linear;
+        }
+
+        @keyframes iconSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .tile-content {
+            flex: 1;
+        }
+        .tile-label {
+            font-size: 0.8rem;
+            color: #d4af97;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 2px;
+            opacity: 0.8;
+        }
+        .tile-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #f5d742;
+            word-break: break-word;
+            line-height: 1.2;
+        }
+        .tile-value small { font-size: 0.95rem; color: #e4b130; }
+
+        /* ===== CITATION ===== */
+        .quote-block {
+            background: linear-gradient(130deg, #1e1a12, #1a140e);
+            border-radius: 60px;
+            padding: 30px 25px;
+            margin: 30px 0;
+            border: 3px solid #b8860b;
+            box-shadow: 0 10px 0 #4a3a16;
+            position: relative;
+            overflow: hidden;
+            animation: quotePulse 5s infinite alternate;
+        }
+
+        @keyframes quotePulse {
+            0% { border-color: #b8860b; box-shadow: 0 10px 0 #4a3a16; }
+            100% { border-color: #f5c542; box-shadow: 0 10px 0 #7f621b; }
+        }
+
+        .quote-block::before {
+            content: '“';
+            font-size: 100px;
+            position: absolute;
+            top: -5px;
+            left: 20px;
+            color: rgba(184, 134, 11, 0.25);
+            font-family: serif;
+            animation: quoteMarkLeft 4s infinite alternate;
+        }
+
+        .quote-block::after {
+            content: '”';
+            font-size: 100px;
+            position: absolute;
+            bottom: -30px;
+            right: 20px;
+            color: rgba(184, 134, 11, 0.25);
+            font-family: serif;
+            animation: quoteMarkRight 4s infinite alternate;
+        }
+
+        @keyframes quoteMarkLeft {
+            0% { transform: translateX(0) rotate(0deg); }
+            100% { transform: translateX(-10px) rotate(-5deg); }
+        }
+
+        @keyframes quoteMarkRight {
+            0% { transform: translateX(0) rotate(0deg); }
+            100% { transform: translateX(10px) rotate(5deg); }
+        }
+
+        .quote-text {
+            font-size: clamp(1.3rem, 4vw, 1.9rem);
+            font-style: italic;
+            color: #f0d48c;
+            text-align: center;
+            line-height: 1.5;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            position: relative;
+            z-index: 3;
+            padding: 0 15px;
+            animation: textGlow 3s infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 5px transparent; }
+            100% { text-shadow: 0 0 15px rgba(245,197,66,0.5); }
+        }
+
+        .quote-author {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: #d4af37;
+            text-align: center;
+            font-weight: 600;
+            text-transform: uppercase;
+            opacity: 0.9;
+            animation: authorSlide 4s infinite alternate;
+        }
+
+        @keyframes authorSlide {
+            0% { letter-spacing: 1px; }
+            100% { letter-spacing: 3px; }
+        }
+
+        /* ===== LECTEUR AUDIO ===== */
+        .music-section {
+            background: #1f1b13;
+            border-radius: 80px;
+            padding: 15px 20px;
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border: 2px solid #b8860b;
+            box-shadow: 0 8px 0 #4a3a16;
+            transition: all 0.3s ease;
+            animation: musicFloat 5s infinite alternate;
+        }
+
+        @keyframes musicFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
+        }
+
+        .music-section:hover {
+            box-shadow: 0 12px 0 #7f621b;
+            transform: scale(1.02);
+        }
+
+        .music-badge {
+            background: #2a241b;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.4rem;
+            border: 3px solid #b8860b;
+            box-shadow: 0 4px 0 #5e4a1a;
+            color: #f5c542;
+            transition: all 0.3s ease;
+            animation: badgeSpin 10s infinite linear;
+        }
+
+        @keyframes badgeSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .music-badge:hover {
+            animation: none;
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .music-meta {
+            flex: 1;
+            color: #f3d27c;
+        }
+        .music-meta span:first-child {
+            font-size: 1.4rem;
+            font-weight: 600;
+            display: block;
+            line-height: 1.2;
+        }
+        .music-meta span:last-child {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        audio {
+            width: 100%;
+            max-width: 320px;
+            height: 42px;
+            border-radius: 30px;
+            filter: sepia(50%) hue-rotate(5deg) brightness(0.9);
+            outline: none;
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+        audio:hover {
+            filter: sepia(20%) brightness(1) drop-shadow(0 0 10px #f5c542);
+            transform: scale(1.02);
+        }
+
+        /* ===== GALERIE ===== */
+        .gallery-head {
+            font-size: 2rem;
+            color: #f5c542;
+            margin: 30px 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 2px 2px 0 #5e4a1a;
+            animation: headPulse 3s infinite alternate;
+        }
+
+        @keyframes headPulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.02); }
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .gallery-card {
+            background: #1e1a13;
+            border-radius: 35px;
+            padding: 12px 12px 18px;
+            border: 3px solid #b8860b;
+            box-shadow: 0 8px 0 #4a3a16;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: cardAppear 0.6s ease backwards;
+        }
+
+        .gallery-card:nth-child(1) { animation-delay: 0.2s; }
+        .gallery-card:nth-child(2) { animation-delay: 0.4s; }
+        .gallery-card:nth-child(3) { animation-delay: 0.6s; }
+        .gallery-card:nth-child(4) { animation-delay: 0.8s; }
+
+        @keyframes cardAppear {
+            from { opacity: 0; transform: translateY(30px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 18px 0 #7f621b, 0 0 30px rgba(245,197,66,0.4);
+        }
+
+        .img-frame {
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: 30px;
+            background: #312b20;
+            border: 3px solid #b8860b;
+            overflow: hidden;
+        }
+
+        .img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.95) contrast(1.05);
+            transition: transform 0.5s ease, filter 0.3s ease;
+        }
+
+        .gallery-card:hover .img-frame img {
+            transform: scale(1.1);
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        .img-label {
+            font-size: 1.15rem;
+            color: #f0d48c;
+            font-weight: 600;
+            margin: 12px 0 0 8px;
+            transition: color 0.3s ease;
+        }
+
+        .gallery-card:hover .img-label {
+            color: #f5c542;
+            transform: translateX(5px);
+        }
+
+        /* ===== PALETTE ===== */
+        .palette-box {
+            background: #1f1b13;
+            border-radius: 50px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 3px solid #b8860b;
+            box-shadow: 0 8px 0 #4a3a16;
+            animation: paletteGlow 5s infinite alternate;
+        }
+
+        @keyframes paletteGlow {
+            0% { border-color: #b8860b; }
+            100% { border-color: #f5c542; }
+        }
+
+        .palette-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #f5c542;
+            margin-bottom: 20px;
+            font-weight: 600;
+            animation: titleShake 4s infinite;
+        }
+
+        @keyframes titleShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            75% { transform: translateX(3px); }
+        }
+
+        .swatch-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .swatch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 90px;
+            transition: transform 0.3s ease;
+        }
+
+        .swatch:hover {
+            transform: scale(1.1);
+        }
+
+        .circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 4px solid #b8860b;
+            box-shadow: 0 6px 0 #5e4a1a;
+            transition: all 0.3s ease;
+            animation: colorPulse 3s infinite alternate;
+        }
+
+        @keyframes colorPulse {
+            0% { box-shadow: 0 6px 0 #5e4a1a; }
+            100% { box-shadow: 0 6px 0 #b8860b, 0 0 20px currentColor; }
+        }
+
+        .circle:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 8px 0 #7f621b;
+        }
+
+        .swatch-name {
+            background: #1e1a13;
+            color: #e4b130;
+            padding: 6px 15px;
+            border-radius: 30px;
+            border: 1px solid #b8860b;
+            margin-top: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .swatch:hover .swatch-name {
+            background: #2a241b;
+            color: #f5c542;
+            transform: translateY(-3px);
+        }
+
+        /* ===== CONTACTS ===== */
+        .contacts-wrapper {
+            background: rgba(20, 17, 12, 0.9);
+            backdrop-filter: blur(5px);
+            border-radius: 50px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 3px solid #b8860b;
+            box-shadow: 0 8px 0 #4a3a16;
+            animation: contactGlow 4s infinite alternate;
+        }
+
+        @keyframes contactGlow {
+            0% { box-shadow: 0 8px 0 #4a3a16; }
+            100% { box-shadow: 0 8px 0 #7f621b, 0 0 20px rgba(184,134,11,0.5); }
+        }
+
+        .contacts-head {
+            font-size: 2rem;
+            color: #f5c542;
+            text-align: center;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: headPulse 3s infinite alternate;
+        }
+
+        .contacts-flex {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 18px;
+        }
+
+        .contact-card {
+            background: #252016;
+            border-radius: 45px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            border: 2px solid #b8860b;
+            box-shadow: 0 5px 0 #5e4a1a;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: contactSlide 0.5s ease backwards;
+        }
+
+        .contact-card:nth-child(1) { animation-delay: 0.1s; }
+        .contact-card:nth-child(2) { animation-delay: 0.2s; }
+        .contact-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes contactSlide {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .contact-card:hover {
+            background: #352f24;
+            box-shadow: 0 8px 0 #7f621b;
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .contact-ico {
+            font-size: 2.4rem;
+            min-width: 50px;
+            text-align: center;
+            color: #f5c542;
+            transition: transform 0.3s ease;
+            animation: iconWiggle 4s infinite;
+        }
+
+        @keyframes iconWiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        .contact-card:hover .contact-ico {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .contact-detail .plat {
+            font-size: 0.9rem;
+            color: #d4af97;
+            font-weight: 600;
+        }
+        .contact-detail .handle {
+            font-size: 1.2rem;
+            color: #f5d742;
+            font-weight: 500;
+            word-break: break-word;
+            transition: color 0.3s ease;
+        }
+        .contact-detail a {
+            color: #f5d742;
+            text-decoration: none;
+        }
+        .contact-detail a:hover {
+            text-decoration: underline;
+            color: #ffdb7c;
+        }
+
+        /* ===== SIGNATURE ===== */
+        .signature-zone {
+            background: linear-gradient(145deg, #1e1a12, #15110b);
+            border-radius: 60px;
+            padding: 30px 15px;
+            text-align: center;
+            margin: 30px 0 20px;
+            border: 3px solid #b8860b;
+            box-shadow: 0 10px 0 #4a3a16;
+            transition: all 0.3s ease;
+            animation: signatureGlow 4s infinite alternate;
+        }
+
+        @keyframes signatureGlow {
+            0% { border-color: #b8860b; }
+            100% { border-color: #f5c542; box-shadow: 0 10px 0 #7f621b, 0 0 30px #f5c542; }
+        }
+
+        .signature-zone:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 0 #7f621b;
+        }
+
+        .signature-zone .sig {
+            font-size: clamp(1.7rem, 6vw, 2.7rem);
+            color: #f5c542;
+            text-shadow: 2px 2px 0 #5e4a1a;
+            font-weight: 700;
+            letter-spacing: 2px;
+            animation: sigPulse 2s infinite alternate;
+        }
+
+        @keyframes sigPulse {
+            0% { text-shadow: 2px 2px 0 #5e4a1a; }
+            100% { text-shadow: 4px 4px 0 #7f621b, 0 0 15px #f5c542; }
+        }
+
+        /* footer */
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #b8860b;
+            color: #d4af97;
+            transition: all 0.3s ease;
+        }
+
+        footer:hover {
+            border-top-color: #f5c542;
+            transform: translateY(-3px);
+        }
+
+        .big-emoji {
+            font-size: 2.5rem;
+            color: #f5c542;
+            display: inline-block;
+            animation: emojiSpin 10s infinite linear;
+        }
+
+        @keyframes emojiSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .big-emoji:hover {
+            animation: none;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- poussières dorées fixes -->
+    <div class="static-motes">
+        <span style="top:12%; left:6%;">⚔️</span>
+        <span style="top:28%; right:10%;">🛡️</span>
+        <span style="bottom:20%; left:12%;">🏹</span>
+        <span style="bottom:40%; right:18%;">🗡️</span>
+        <span style="top:65%; left:25%;">🌑</span>
+        <span style="top:8%; right:25%;">⚜️</span>
+    </div>
+
+    <div class="card-container">
+        <!-- HEADER avec image de profil -->
+        <div class="hero">
+            <div class="avatar">
+                <img src="A.jpeg" alt="Photo de profil Johnson">
+            </div>
+            <h1>Johnson Daril</h1>
+            <div class="age-tag">
+                <span>⚜️ 17 ans</span> <span style="color:#a87e2b;">|</span> <span>09 avril 2008 ⚜️</span>
+            </div>
+        </div>
+
+        <!-- CARTE INFOS PERSO -->
+        <div class="info-panel">
+            <div class="info-grid">
+                <div class="info-tile">
+                    <span class="tile-icon">⚜️</span>
+                    <div class="tile-content">
+                        <div class="tile-label">Nom complet</div>
+                        <div class="tile-value">Johnson Daril</div>
+                    </div>
+                </div>
+                <div class="info-tile">
+                    <span class="tile-icon">📅</span>
+                    <div class="tile-content">
+                        <div class="tile-label">Âge / naissance</div>
+                        <div class="tile-value">17 ans (09/04/08)</div>
+                    </div>
+                </div>
+                <div class="info-tile">
+                    <span class="tile-icon">🎮</span>
+                    <div class="tile-content">
+                        <div class="tile-label">Genre de jeu</div>
+                        <div class="tile-value">Aventure 🏕️</div>
+                    </div>
+                </div>
+                <div class="info-tile">
+                    <span class="tile-icon">👥</span>
+                    <div class="tile-content">
+                        <div class="tile-label">Frère / sœur</div>
+                        <div class="tile-value">Michelle <span style="color:#b8860b;">(frère)</span></div>
+                    </div>
+                </div>
+                <div class="info-tile">
+                    <span class="tile-icon">💛</span>
+                    <div class="tile-content">
+                        <div class="tile-label">Sa meuf</div>
+                        <div class="tile-value">Michelle 💕</div>
+                    </div>
+                </div>
+                <div class="info-tile">
+                    <span class="tile-icon">📏</span>
+                    <div class="tile-content">
+                        <div class="tile-label">Taille</div>
+                        <div class="tile-value">1,87 m ⚡</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CITATION -->
+        <div class="quote-block">
+            <div class="quote-text">
+                « L'aventure ne consiste pas à suivre une carte, mais à tracer sa propre légende dans l'inconnu. »
+            </div>
+            <div class="quote-author">
+                — Johnson Daril
+            </div>
+        </div>
+
+        <!-- lecteur "musique d'aventure" -->
+        <div class="music-section">
+            <div class="music-badge">🎵</div>
+            <div class="music-meta">
+                <span>⚔️ Bande-son d'aventure ⚔️</span>
+                <span>Hans Zimmer · esprit libre</span>
+            </div>
+            <audio controls loop>
+                <source src="Melly Mike - Young Black & Rich (Official Music Video).mp3" type="audio/wav">
+            </audio>
+        </div>
+
+        <!-- GALERIE (tu pourras remplacer les src par tes images) -->
+        <div class="gallery-head">
+            ⚜️ Galerie d'aventure ⚜️
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-card">
+                <div class="img-frame">
+                    <img src="Q.jpg" alt="Image aventure 1">
+                </div>
+                <div class="img-label">God Of War </div>
+            </div>
+            <div class="gallery-card">
+                <div class="img-frame">
+                    <img src="ss_14452a22c2feef040a0f81dad4d651b48118bdba.1920x1080.jpg" alt="Image aventure 2">
+                </div>
+                <div class="img-label">Dragon Ball Super </div>
+            </div>
+            <div class="gallery-card">
+                <div class="img-frame">
+                    <img src="product_dmc_thumb.jpg" alt="Image aventure 3">
+                </div>
+                <div class="img-label">Dévil May Cry</div>
+            </div>
+            <div class="gallery-card">
+                <div class="img-frame">
+                    <img src="Roblox_(2025)_(App_Icon).png" alt="Image aventure 4">
+                </div>
+                <div class="img-label">Roblox</div>
+            </div>
+        </div>
+
+        <!-- PALETTE DE COULEURS -->
+        <div class="palette-box">
+            <div class="palette-title">🖤 Couleurs du guerrier 🖤</div>
+            <div class="swatch-list">
+                <div class="swatch"><div class="circle" style="background:#0a0a0a;"></div><span class="swatch-name">Noir profond</span></div>
+                <div class="swatch"><div class="circle" style="background:#d4af37;"></div><span class="swatch-name">Or brûlé</span></div>
+                <div class="swatch"><div class="circle" style="background:#8b6b1d;"></div><span class="swatch-name">Bronze antique</span></div>
+            </div>
+        </div>
+
+        <!-- CONTACTS -->
+        <div class="contacts-wrapper">
+            <div class="contacts-head">📫 Me contacter</div>
+            <div class="contacts-flex">
+                <div class="contact-card">
+                    <div class="contact-ico">👤</div>
+                    <div class="contact-detail">
+                        <div class="plat">Facebook (princ.)</div>
+                        <div class="handle">Johnson Daril</div>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-ico">👥</div>
+                    <div class="contact-detail">
+                        <div class="plat">Facebook (second)</div>
+                        <div class="handle">Daril Explorer</div>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-ico">📱</div>
+                    <div class="contact-detail">
+                        <div class="plat">WhatsApp</div>
+                        <div class="handle"><a href="https://wa.me/509XXXXXXXX">+509 00 00 00 00</a></div>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align:center; color:#b8860b; margin-top:15px;"></p>
+        </div>
+
+        <!-- SIGNATURE DARIL -->
+        <div class="signature-zone">
+            <div class="sig">
+                 D̸͖̠̜̳̥̺̹̎͐̕͜ẻ̵͜ä̶̧̪̥͍̙́d̷̥̮̒̐̎̇V̵̻̩̻̯̻̌̿́̂̉̐̚͜͝o̶̧̬̟͉̮͑̃̇̇̃̂͐̓̀̒ẁ̸͉̎̔͜V̴̨͇͎̻̭̻̜̀̈́̽̉̉̽̀̃ë̸̖̘̆͌͂̑̊͘͘͘x̷̧̯̲̹̀̄̅̋̈́̈́̒̀̀̚ 
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="big-emoji">⚜️</div>
+            <p>Johnson Daril · 17 ans · 09/04/2008<br>
+            <span style="font-size:0.9rem; color:#d4af97;">Aventure · Michelle · 1,87 m</span></p>
+            <p style="font-size:0.8rem; margin-top:8px;">🖤 Noir, Or, Bronze 🖤</p>
+        </footer>
+    </div>
+</body>
+</html>
